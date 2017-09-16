@@ -51,7 +51,6 @@ while counter <= howmany:
 #user input for filename. Can even take in a file path, pending you have permission to write there
 filename = raw_input("name your file: ")
 
-bar = progressbar.ProgressBar()
 '''
 Acutally writes to file here.
 uses WA which will write and append the file. If the file doesn't exist, this will create it. 
@@ -60,13 +59,13 @@ Once complete, will close the file.
 '''
 print "Progress: "
 
-for i in bar(range(howmany)):
-	emailfile = open(str(filename), 'wa')
-	aa = csv.writer(emailfile)
-	for emailaddr in emailarray:
-		aa.writerow([emailaddr])
-		bar.update(i)
-	emailfile.close()
+bar = progressbar.ProgressBar(maxval=int(howmany))
+	
+emailfile = open(str(filename), 'wa')
+aa = csv.writer(emailfile)
+for emailaddr in bar(emailarray):
+	aa.writerow([emailaddr])
+	bar.update()
+emailfile.close()
 
 print "File '" + filename + "' created."
-
