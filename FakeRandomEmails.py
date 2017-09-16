@@ -1,6 +1,7 @@
 import random
 import string
 import csv
+import progressbar
 
 '''
 Asks user for how many fake emails they want generated. Must be Integer. Duh.
@@ -50,18 +51,22 @@ while counter <= howmany:
 #user input for filename. Can even take in a file path, pending you have permission to write there
 filename = raw_input("name your file: ")
 
+bar = progressbar.ProgressBar()
 '''
 Acutally writes to file here.
 uses WA which will write and append the file. If the file doesn't exist, this will create it. 
 Will write email addresses to array one per row which is why the array is important. 
 Once complete, will close the file. 
 '''
+print "Progress: "
 
-emailfile = open(str(filename), 'wa')
-aa = csv.writer(emailfile)
-for emailaddr in emailarray:
-	aa.writerow([emailaddr])
-emailfile.close()
+for i in bar(range(howmany)):
+	emailfile = open(str(filename), 'wa')
+	aa = csv.writer(emailfile)
+	for emailaddr in emailarray:
+		aa.writerow([emailaddr])
+		bar.update(i)
+	emailfile.close()
 
-print "File written to " + filename
+print "File '" + filename + "' created."
 
