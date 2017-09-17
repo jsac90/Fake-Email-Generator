@@ -44,9 +44,19 @@ counter = 0
 emailarray = []
 
 #uses counter to figure out how many emails to keep making
-while counter <= howmany:
-	emailarray.append(str(makeEmail()))
-	counter = counter+1
+
+print "Creating email addresses..."
+print "Progress: "
+
+prebar = progressbar.ProgressBar(maxval=int(howmany))
+
+for i in prebar(range(howmany)):
+	while counter <= howmany:
+		emailarray.append(str(makeEmail()))
+		counter = counter+1
+		prebar.update(i)
+	
+print "Creation completed."
 
 #user input for filename. Can even take in a file path, pending you have permission to write there
 filename = raw_input("name your file: ")
