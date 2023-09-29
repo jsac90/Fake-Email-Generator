@@ -8,12 +8,12 @@ Asks user for how many fake emails they want generated. Must be Integer. Duh.
 If not an integer, keeps recursively cycling back until it gets an integer. 
 '''
 def getcount():
-	rownums = raw_input("How many fake email addresses?: ")
+	rownums = input("How many fake email addresses?: ")
 	try:
 		rowint = int(rownums)
 		return rowint
 	except ValueError:
-		print "Please enter an integer value"
+		print ("Please enter an integer value")
 		return getcount()
 
 '''
@@ -45,8 +45,8 @@ emailarray = []
 
 #uses counter to figure out how many emails to keep making
 
-print "Creating email addresses..."
-print "Progress: "
+print ("Creating email addresses...")
+print ("Progress: ")
 
 prebar = progressbar.ProgressBar(maxval=int(howmany))
 
@@ -56,10 +56,10 @@ for i in prebar(range(howmany)):
 		counter = counter+1
 		prebar.update(i)
 	
-print "Creation completed."
+print ("Creation completed.")
 
 #user input for filename. Can even take in a file path, pending you have permission to write there
-filename = raw_input("name your file: ")
+filename = input("name your file: ")
 
 '''
 Acutally writes to file here.
@@ -67,15 +67,15 @@ uses WA which will write and append the file. If the file doesn't exist, this wi
 Will write email addresses to array one per row which is why the array is important. 
 Once complete, will close the file. 
 '''
-print "Progress: "
+print ("Progress: ")
 
 bar = progressbar.ProgressBar(maxval=int(howmany))
 	
-emailfile = open(str(filename), 'wa')
+emailfile = open(str(filename), 'w')
 aa = csv.writer(emailfile)
 for emailaddr in bar(emailarray):
 	aa.writerow([emailaddr])
 	bar.update()
 emailfile.close()
 
-print "File '" + filename + "' created."
+print ("File '" + filename + "' created.")
