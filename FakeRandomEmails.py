@@ -1,3 +1,6 @@
+'''make sure you pip install progressbar'''
+
+
 import random
 import string
 import csv
